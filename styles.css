@@ -911,6 +911,61 @@ html:has(.visor-foto[open]) { overflow: hidden; }
 .pie a { color: var(--on-panel); text-decoration: none; }
 .pie a:hover { text-decoration: underline; }
 
+/* ---------- Carruseles en el teléfono (script.js agrega .es-carrusel; sin JavaScript quedan como lista) ---------- */
+[data-carrusel].es-carrusel {
+  position: relative;
+  display: flex;
+  gap: 12px;
+  margin-inline: calc(-1 * var(--gutter));
+  padding: 6px var(--gutter) 18px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--gutter);
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+[data-carrusel].es-carrusel::-webkit-scrollbar { display: none; }
+[data-carrusel].es-carrusel > * { flex: 0 0 86%; scroll-snap-align: center; }
+.galeria.es-carrusel { padding-bottom: 6px; }
+.carrusel__controles { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 10px; }
+.carrusel__puntos { display: flex; }
+.carrusel__punto {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+.carrusel__punto::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+  background: var(--line);
+  transition: width .2s, background-color .2s;
+}
+.carrusel__punto[aria-current="true"]::before { width: 22px; background: var(--copper); }
+.carrusel__pausa {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--card);
+  color: var(--ink);
+  cursor: pointer;
+}
+.carrusel__pausa .ic { width: 16px; height: 16px; }
+@media (prefers-reduced-motion: reduce) {
+  .carrusel__punto::before { transition: none; }
+}
+
 /* ---------- Barra fija en el teléfono ---------- */
 .barra-movil {
   position: fixed;

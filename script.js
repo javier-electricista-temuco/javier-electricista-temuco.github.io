@@ -349,6 +349,130 @@ function galeria() {
   });
 }
 
+/* ---------- Carruseles en el teléfono ----------
+   Las secciones con data-carrusel pasan solas cada 5 s y se quedan quietas mientras el dedo
+   está encima. No avanzan si están pausadas con el botón, fuera de la vista, con una foto
+   abierta, con el foco del teclado dentro o con «reducir movimiento». En computador no cambian. */
+const INTERVALO_CARRUSEL = 5000;
+
+function crearCarrusel(pista) {
+  const reducido = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let activo = false;
+  let pausado = reducido;
+  let tocando = false;
+  let visible = false;
+  let actual = 0;
+  let temporizador = null;
+  let esperaScroll = null;
+
+  const items = () => [...pista.children];
+  const controles = document.createElement('div');
+  controles.className = 'carrusel__controles';
+  controles.hidden = true;
+  const puntos = document.createElement('div');
+  puntos.className = 'carrusel__puntos';
+  const boton = document.createElement('button');
+  boton.type = 'button';
+  boton.className = 'carrusel__pausa';
+  controles.append(puntos, boton);
+  pista.after(controles);
+
+  function pintarBoton() {
+    boton.setAttribute('aria-pressed', String(pausado));
+    boton.setAttribute('aria-label', pausado ? `Reanudar: ${pista.dataset.carrusel}` : `Pausar: ${pista.dataset.carrusel}`);
+    boton.innerHTML = `<svg class="ic" aria-hidden="true"><use href="#${pausado ? 'i-play' : 'i-pausa'}"/></svg>`;
+  }
+  function marcar() {
+    [...puntos.children].forEach((p, i) => {
+      if (i === actual) p.setAttribute('aria-current', 'true');
+      else p.removeAttribute('aria-current');
+    });
+  }
+  function ir(i) {
+    const item = items()[i];
+    if (!item) return;
+    actual = i;
+    pista.scrollTo({ left: item.offsetLeft - (pista.clientWidth - item.offsetWidth) / 2, behavior: reducido ? 'auto' : 'smooth' });
+    marcar();
+  }
+  function pintarPuntos() {
+    const total = items().length;
+    puntos.replaceChildren(...items().map((_, i) => {
+      const p = document.createElement('button');
+      p.type = 'button';
+      p.className = 'carrusel__punto';
+      p.setAttribute('aria-label', `Ir a ${i + 1} de ${total}`);
+      p.addEventListener('click', () => { ir(i); reiniciar(); });
+      return p;
+    }));
+    marcar();
+  }
+  function masCercano() {
+    const centro = pista.scrollLeft + pista.clientWidth / 2;
+    let mejor = 0;
+    let distancia = Infinity;
+    items().forEach((item, i) => {
+      const d = Math.abs(item.offsetLeft + item.offsetWidth / 2 - centro);
+      if (d < distancia) { distancia = d; mejor = i; }
+    });
+    return mejor;
+  }
+  const puedeAvanzar = () => activo && !pausado && !tocando && visible && !document.hidden
+    && !document.querySelector('dialog[open]') && !pista.querySelector(':focus-visible');
+  function reiniciar() {
+    clearInterval(temporizador);
+    if (!activo) return;
+    temporizador = setInterval(() => {
+      if (puedeAvanzar() && items().length > 1) ir((actual + 1) % items().length);
+    }, INTERVALO_CARRUSEL);
+  }
+
+  // Dedo encima: quieto. Se usan eventos táctiles porque el navegador cancela los de puntero
+  // apenas empieza a deslizar, aunque el dedo siga apoyado.
+  pista.addEventListener('touchstart', () => { tocando = true; }, { passive: true });
+  ['touchend', 'touchcancel'].forEach((tipo) => pista.addEventListener(tipo, () => { tocando = false; reiniciar(); }, { passive: true }));
+  pista.addEventListener('scroll', () => {
+    clearTimeout(esperaScroll);
+    esperaScroll = setTimeout(() => { actual = masCercano(); marcar(); }, 120);
+  }, { passive: true });
+  boton.addEventListener('click', () => { pausado = !pausado; pintarBoton(); reiniciar(); });
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(([e]) => { visible = e.intersectionRatio >= 0.5; }, { threshold: [0, 0.5, 1] }).observe(pista);
+  } else {
+    visible = true;
+  }
+
+  return {
+    activar() {
+      if (activo || !items().length) return;
+      activo = true;
+      pista.classList.add('es-carrusel');
+      pista.setAttribute('aria-roledescription', 'carrusel');
+      pista.setAttribute('aria-label', pista.dataset.carrusel);
+      controles.hidden = false;
+      pintarPuntos();
+      pintarBoton();
+      reiniciar();
+    },
+    desactivar() {
+      activo = false;
+      clearInterval(temporizador);
+      pista.classList.remove('es-carrusel');
+      pista.removeAttribute('aria-roledescription');
+      controles.hidden = true;
+    },
+  };
+}
+
+function carruseles() {
+  const telefono = matchMedia('(max-width: 759px)');
+  const lista = [...$$('[data-carrusel]')].map(crearCarrusel);
+  const aplicar = () => lista.forEach((c) => (telefono.matches ? c.activar() : c.desactivar()));
+  if (telefono.addEventListener) telefono.addEventListener('change', aplicar);
+  else telefono.addListener(aplicar); // iOS 13 y anteriores
+  aplicar();
+}
+
 /* Ficha para Google (negocio local). No se publica mientras el teléfono sea de ejemplo. */
 function datosEstructurados() {
   if (esBorrador) return;
@@ -402,4 +526,5 @@ barraMovil();
 formularioWhatsApp();
 fotoPerfil();
 galeria();
+carruseles(); // después de galeria(), que crea las fotos
 datosEstructurados();
