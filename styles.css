@@ -154,20 +154,6 @@ h1, h2, h3 {
 }
 .saltar:focus { top: 12px; }
 
-.aviso-borrador {
-  padding: .55rem var(--gutter);
-  background: var(--signal);
-  color: #16181D;
-  font-size: .875rem;
-  text-align: center;
-}
-.aviso-borrador code {
-  padding: .1em .35em;
-  border-radius: 4px;
-  background: rgb(0 0 0 / .1);
-  font-size: .85em;
-}
-
 /* ---------- Botones ---------- */
 .btn {
   display: inline-flex;

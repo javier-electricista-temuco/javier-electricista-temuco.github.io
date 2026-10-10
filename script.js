@@ -110,11 +110,6 @@ function rellenarDatos() {
   for (const [selector, texto] of Object.entries(textos)) {
     $$(selector).forEach((el) => { el.textContent = texto; });
   }
-
-  // Dentro del comparador de plantillas (iframe) el aviso se omite para comparar en igualdad.
-  if (esBorrador && window.self === window.top) {
-    document.querySelector('[data-aviso-borrador]')?.removeAttribute('hidden');
-  }
 }
 
 /* ---------- Estado "atendiendo ahora", siempre con la hora de Chile ---------- */
@@ -238,16 +233,22 @@ function formularioWhatsApp() {
   });
 }
 
+/* Imagen con carga diferida: `loading` tiene que ir ANTES que `src`; si no, el navegador
+   empieza a descargarla apenas recibe la dirección, aunque esté lejos en la página. */
+function crearImagen(src, alt) {
+  const img = document.createElement('img');
+  img.loading = 'lazy';
+  img.decoding = 'async';
+  img.alt = alt;
+  img.src = src;
+  return img;
+}
+
 /* Foto de «Sobre mí»: si no hay, queda el recuadro con la inicial. */
 function fotoPerfil() {
   const marco = document.querySelector('[data-foto-perfil]');
   if (!marco || !CONFIG.fotoPerfil) return;
-  const img = Object.assign(document.createElement('img'), {
-    src: CONFIG.fotoPerfil,
-    alt: CONFIG.fotoPerfilTexto || `${CONFIG.nombre}, electricista`,
-    loading: 'lazy',
-    decoding: 'async',
-  });
+  const img = crearImagen(CONFIG.fotoPerfil, CONFIG.fotoPerfilTexto || `${CONFIG.nombre}, electricista`);
   if (CONFIG.fotoPerfilEnfoque) img.style.objectPosition = CONFIG.fotoPerfilEnfoque;
   marco.textContent = '';
   marco.append(img);
@@ -285,7 +286,11 @@ function galeria() {
   if (!fotos.length) {
     if (!['localhost', '127.0.0.1'].includes(location.hostname)) return;
     fotos = FOTOS_EJEMPLO.map(([titulo, lugar], i) => ({ foto: fotoDeEjemplo(i + 1), titulo, lugar }));
-    document.querySelector('[data-galeria-aviso]')?.removeAttribute('hidden');
+    // El aviso se crea aquí y no va escrito en el HTML: así nunca llega a la página publicada.
+    const aviso = document.createElement('p');
+    aviso.className = 'galeria__aviso';
+    aviso.textContent = 'Vista previa con fotos de ejemplo. Esta sección se publica solo cuando agregues tus fotos reales.';
+    grilla.before(aviso);
   }
   seccion.hidden = false;
   $$('[data-galeria-enlace]').forEach((el) => { el.hidden = false; });
@@ -296,7 +301,7 @@ function galeria() {
     boton.type = 'button';
     boton.className = 'galeria__item';
     boton.setAttribute('aria-label', `Ver foto: ${descripcion(f)}`);
-    const img = Object.assign(document.createElement('img'), { src: f.foto, alt: '', loading: 'lazy', decoding: 'async' });
+    const img = crearImagen(f.foto, '');
     const texto = document.createElement('span');
     texto.className = 'galeria__texto';
     const titulo = document.createElement('strong');
@@ -354,6 +359,10 @@ function galeria() {
    está encima. No avanzan si están pausadas con el botón, fuera de la vista, con una foto
    abierta, con el foco del teclado dentro o con «reducir movimiento». En computador no cambian. */
 const INTERVALO_CARRUSEL = 5000;
+// :focus-visible no existe antes de iOS 15.4 y ahí querySelector lanzaría un error; se usa :focus.
+const SELECTOR_FOCO = (() => {
+  try { document.querySelector(':focus-visible'); return ':focus-visible'; } catch { return ':focus'; }
+})();
 
 function crearCarrusel(pista) {
   const reducido = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -378,7 +387,7 @@ function crearCarrusel(pista) {
   pista.after(controles);
 
   function pintarBoton() {
-    boton.setAttribute('aria-pressed', String(pausado));
+    // Solo cambia el nombre («Pausar» / «Reanudar»): sumarle aria-pressed lo haría leer contradictorio.
     boton.setAttribute('aria-label', pausado ? `Reanudar: ${pista.dataset.carrusel}` : `Pausar: ${pista.dataset.carrusel}`);
     boton.innerHTML = `<svg class="ic" aria-hidden="true"><use href="#${pausado ? 'i-play' : 'i-pausa'}"/></svg>`;
   }
@@ -418,7 +427,7 @@ function crearCarrusel(pista) {
     return mejor;
   }
   const puedeAvanzar = () => activo && !pausado && !tocando && visible && !document.hidden
-    && !document.querySelector('dialog[open]') && !pista.querySelector(':focus-visible');
+    && !document.querySelector('dialog[open]') && !pista.querySelector(SELECTOR_FOCO);
   function reiniciar() {
     clearInterval(temporizador);
     if (!activo) return;
@@ -447,6 +456,8 @@ function crearCarrusel(pista) {
       if (activo || !items().length) return;
       activo = true;
       pista.classList.add('es-carrusel');
+      // Un <div> no tiene función propia y los lectores de pantalla ignorarían su nombre; una lista sí la tiene.
+      if (pista.tagName !== 'UL') pista.setAttribute('role', 'group');
       pista.setAttribute('aria-roledescription', 'carrusel');
       pista.setAttribute('aria-label', pista.dataset.carrusel);
       controles.hidden = false;
@@ -458,7 +469,9 @@ function crearCarrusel(pista) {
       activo = false;
       clearInterval(temporizador);
       pista.classList.remove('es-carrusel');
+      if (pista.tagName !== 'UL') pista.removeAttribute('role');
       pista.removeAttribute('aria-roledescription');
+      pista.removeAttribute('aria-label');
       controles.hidden = true;
     },
   };
