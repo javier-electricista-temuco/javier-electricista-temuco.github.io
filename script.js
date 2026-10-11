@@ -509,6 +509,8 @@ function datosEstructurados() {
       addressCountry: 'CL',
     },
     areaServed: CONFIG.comunas.map((name) => ({ '@type': 'City', name })),
+    // Perfiles en redes sociales: se toman de los enlaces de la página, así no hay que anotarlos dos veces.
+    sameAs: [...$$('[data-red]')].map((a) => a.href),
     paymentAccepted: 'Efectivo, transferencia bancaria',
     currenciesAccepted: 'CLP',
     openingHoursSpecification: [...porHorario].map(([clave, dias]) => ({

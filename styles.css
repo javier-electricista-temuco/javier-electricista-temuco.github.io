@@ -884,6 +884,30 @@ html:has(.visor-foto[open]) { overflow: hidden; }
 .mensaje textarea:focus { outline: none; border-color: var(--signal); box-shadow: 0 0 0 3px rgb(255 194 26 / .25); }
 .mensaje__privacidad { margin-top: -10px; color: var(--on-panel-2); font-size: .8125rem; text-align: center; }
 
+/* Redes sociales (Contacto y pie) */
+.redes { margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--panel-line); }
+.redes__titulo { color: var(--on-panel-2); font-size: .9375rem; }
+.redes__lista { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px; }
+.red {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 56px;
+  padding: 8px 18px 8px 10px;
+  border: 1.5px solid var(--panel-line);
+  border-radius: var(--radius-sm);
+  color: var(--on-panel);
+  text-decoration: none;
+  transition: border-color .15s, background-color .15s;
+}
+.red:hover { border-color: var(--on-panel-2); background: rgb(255 255 255 / .04); }
+.red .ic { width: 38px; height: 38px; padding: 8px; border-radius: 10px; background: rgb(255 194 26 / .12); color: var(--signal); }
+.red span { display: flex; flex-direction: column; color: var(--on-panel-2); font-size: .875rem; line-height: 1.25; }
+.red strong { color: var(--on-panel); font-size: 1rem; font-weight: 600; }
+@media (max-width: 479px) {
+  .red { flex: 1 1 100%; }
+}
+
 /* ---------- Pie ---------- */
 .pie {
   padding-block: 28px;
@@ -896,6 +920,11 @@ html:has(.visor-foto[open]) { overflow: hidden; }
 .pie strong { color: var(--on-panel); }
 .pie a { color: var(--on-panel); text-decoration: none; }
 .pie a:hover { text-decoration: underline; }
+.pie__redes { display: flex; align-items: center; gap: 6px; }
+.pie__redes a { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; color: var(--on-panel-2); }
+.pie__redes a:hover { background: rgb(255 255 255 / .06); color: var(--on-panel); }
+.pie__redes .ic { width: 20px; height: 20px; }
+.pie__redes span { margin-left: 6px; }
 
 /* ---------- Carruseles en el teléfono (script.js agrega .es-carrusel; sin JavaScript quedan como lista) ---------- */
 [data-carrusel].es-carrusel {
