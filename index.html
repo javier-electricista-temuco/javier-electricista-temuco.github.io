@@ -23,7 +23,7 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preload" href="fuentes/barlow-condensed-700.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="fuentes/barlow-400.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=2998d8a3f8">
+  <link rel="stylesheet" href="styles.css?v=4b1b5b43c9">
   <script>document.documentElement.classList.add('js');</script>
   <script src="script.js?v=d9913abf40" defer></script>
 </head>
@@ -54,6 +54,15 @@
   </svg>
 
   <a class="saltar" href="#contenido">Saltar al contenido</a>
+
+  <!-- Cinta de emergencia: lo primero que se ve al abrir la página (pedido de Javier, 2026-11-03). -->
+  <section class="emergencia" aria-label="Emergencias">
+    <div class="wrap emergencia__in">
+      <p class="emergencia__rotulo"><svg class="ic" aria-hidden="true"><use href="#i-alerta"/></svg>Emergencias</p>
+      <a class="emergencia__132" href="tel:132"><svg class="ic" aria-hidden="true"><use href="#i-fuego"/></svg><span><span class="emergencia__cuando">¿Fuego o humo? </span><strong>Bomberos 132</strong></span></a>
+      <a class="emergencia__ver" href="#urgencias"><span><span class="emergencia__cuando">¿Chispas u olor a quemado? </span>Qué hacer</span><svg class="ic" aria-hidden="true"><use href="#i-flecha"/></svg></a>
+    </div>
+  </section>
 
   <header class="topbar">
     <div class="wrap topbar__in">

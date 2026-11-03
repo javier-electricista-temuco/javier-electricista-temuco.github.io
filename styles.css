@@ -221,6 +221,21 @@ h1, h2, h3 {
   .topbar__llamar { display: inline-flex; }
 }
 
+/* ---------- Cinta de emergencia: lo primero que se ve al abrir la página ----------
+   No es fija: al bajar se va y la barra superior queda arriba. En el teléfono se acortan los textos. */
+.emergencia { background: #B3261E; color: #FFFFFF; }
+.emergencia__in { display: flex; align-items: center; gap: 12px 20px; min-height: 44px; }
+.emergencia__rotulo { display: none; align-items: center; gap: 8px; font: 700 .875rem/1 var(--font-display); letter-spacing: .12em; text-transform: uppercase; }
+.emergencia a { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; color: #FFFFFF; font-size: .875rem; font-weight: 600; line-height: 1.2; text-decoration: none; white-space: nowrap; }
+.emergencia__132 strong { font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+.emergencia__ver { margin-left: auto; }
+.emergencia a:hover > span { text-decoration: underline; text-underline-offset: 3px; }
+.emergencia .ic { width: 18px; height: 18px; }
+.emergencia :focus-visible { outline-color: #FFFFFF; outline-offset: 0; }
+@media (max-width: 359px) { .emergencia__132 .emergencia__cuando { display: none; } }
+@media (max-width: 759px) { .emergencia__ver .emergencia__cuando { display: none; } }
+@media (min-width: 760px) { .emergencia__rotulo { display: inline-flex; } }
+
 /* ---------- Portada ---------- */
 .hero {
   position: relative;
