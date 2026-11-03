@@ -7,13 +7,21 @@
   <title>Página no encontrada | Javier, electricista</title>
   <link rel="icon" href="https://javier-electricista-temuco.github.io/favicon.svg" type="image/svg+xml">
   <style>
+    /* Mismo papel de plano de la página (claro) y plano azul en modo oscuro. */
+    :root { color-scheme: light dark; --bg: #F3F0E7; --ink: #14161B; --plano: #2457C5; --grid: rgb(36 87 197 / .09); }
+    @media (prefers-color-scheme: dark) { :root { --bg: #0D2341; --ink: #EAF2FF; --plano: #9CC3FF; --grid: rgb(156 195 255 / .1); } }
     body { margin: 0; min-height: 100vh; display: grid; place-content: center; gap: 16px; padding: 24px;
-      background: #1A1D23; color: #EEEBE4; font: 17px/1.6 system-ui, sans-serif; text-align: center; }
-    h1 { margin: 0; font-size: 1.75rem; }
-    a { justify-self: center; padding: .8em 1.4em; border-radius: 10px; background: #FFC21A; color: #16181D; font-weight: 600; text-decoration: none; }
+      background-color: var(--bg); color: var(--ink); font: 17px/1.6 system-ui, sans-serif; text-align: center;
+      background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+      background-size: 24px 24px; }
+    p { margin: 0; }
+    .rotulo { color: var(--plano); font-size: .85rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; }
+    h1 { margin: 0; font-size: 1.9rem; text-transform: uppercase; }
+    a { justify-self: center; padding: .8em 1.4em; border: 2px solid #14161B; border-radius: 4px; background: #FFC21A; color: #14161B; font-weight: 600; text-decoration: none; }
   </style>
 </head>
 <body>
+  <p class="rotulo">Error 404 · Lámina no encontrada</p>
   <h1>Esta página no existe</h1>
   <p>Puede que el enlace esté mal escrito.</p>
   <a href="https://javier-electricista-temuco.github.io/">Ir a la página de Javier, electricista</a>

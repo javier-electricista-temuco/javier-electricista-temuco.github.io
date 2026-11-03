@@ -543,3 +543,67 @@ fotoPerfil();
 galeria();
 carruseles(); // después de galeria(), que crea las fotos
 datosEstructurados();
+
+/* ---------- Movimiento del plano técnico ----------
+   Va al final porque necesita los datos ya puestos (años, horario, estado) y la galería armada.
+   En <head> se marcó .js y .tl / .no-tl. */
+(function () {
+  const quieto = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const raiz = document.documentElement;
+
+  // Agrega .en-vista cuando algo aparece en pantalla. Lo usan el respaldo sin animaciones ligadas al
+  // scroll y los efectos que pasan una sola vez (el circuito de «Cómo trabajo» y el contador de años).
+  const marcar = (el) => el.classList.add('en-vista');
+  const observados = document.querySelectorAll('[data-revela], [data-vista], [data-contar], .galeria__item');
+  if (!('IntersectionObserver' in window) || quieto) {
+    observados.forEach(marcar);
+  } else {
+    const io = new IntersectionObserver((entradas) => {
+      entradas.forEach((e) => {
+        if (!e.isIntersecting) return;
+        marcar(e.target);
+        if (e.target.hasAttribute('data-contar')) contar(e.target);
+        io.unobserve(e.target);
+      });
+    }, { rootMargin: '0px 0px -12% 0px', threshold: 0.15 });
+    observados.forEach((el) => io.observe(el));
+  }
+
+  // Contador: el número real ya está escrito (lo calcula script.js); aquí solo se anima de 0 a ese número.
+  function contar(el) {
+    const final = parseInt(el.textContent, 10);
+    if (!final) return;
+    const duracion = 1400;
+    const inicio = performance.now();
+    el.setAttribute('aria-hidden', 'true');
+    const paso = (t) => {
+      const p = Math.min(1, (t - inicio) / duracion);
+      el.textContent = String(Math.round(final * (1 - Math.pow(1 - p, 3))));
+      if (p < 1) requestAnimationFrame(paso);
+      else el.removeAttribute('aria-hidden');
+    };
+    el.textContent = '0';
+    requestAnimationFrame(paso);
+  }
+
+  // Cabecera: muestra la lámina (sección) que se está viendo y la marca en el menú.
+  const lamina = document.querySelector('[data-lamina]');
+  const secciones = document.querySelectorAll('[data-lamina-nombre]');
+  if ('IntersectionObserver' in window && secciones.length) {
+    const enlaces = [...document.querySelectorAll('.nav a[href^="#"]')];
+    const espia = new IntersectionObserver((entradas) => {
+      entradas.forEach((e) => {
+        if (!e.isIntersecting) return;
+        if (lamina) lamina.textContent = `Lámina ${e.target.dataset.laminaNombre}`;
+        enlaces.forEach((a) => {
+          if (a.getAttribute('href') === `#${e.target.id}`) a.setAttribute('aria-current', 'true');
+          else a.removeAttribute('aria-current');
+        });
+      });
+    }, { rootMargin: '-35% 0px -60% 0px' });
+    secciones.forEach((s) => espia.observe(s));
+  }
+
+  // Marca cuándo terminó de cargar, para las animaciones de entrada de la portada.
+  requestAnimationFrame(() => requestAnimationFrame(() => raiz.classList.add('cargada')));
+})();

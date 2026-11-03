@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Electricista en Temuco y Padre Las Casas | Javier</title>
   <meta name="description" content="Electricista en Temuco y Padre Las Casas. Reparación de fallas y urgencias, instalaciones nuevas, iluminación LED y mantención para casas y locales. Escríbeme por WhatsApp.">
-  <meta name="theme-color" content="#1A1D23">
+  <meta name="theme-color" content="#F3F0E7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0D2341" media="(prefers-color-scheme: dark)">
   <!-- Verificación de Google Search Console (propiedad https://javier-electricista-temuco.github.io/). No borrar. -->
   <meta name="google-site-verification" content="iAd7MnyDOXHpbnHvnMazZgiNyr5RzLzP9NozAkIXse0" />
   <meta property="og:type" content="website">
@@ -23,9 +24,16 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preload" href="fuentes/barlow-condensed-700.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="fuentes/barlow-400.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=4b1b5b43c9">
-  <script>document.documentElement.classList.add('js');</script>
-  <script src="script.js?v=d9913abf40" defer></script>
+  <link rel="stylesheet" href="styles.css?v=6ed1c122fa">
+  <script>
+    // .js y .tl / .no-tl van antes de pintar, para que las animaciones no parpadeen al cargar.
+    // .tl: el navegador anima con el scroll; .no-tl: respaldo con IntersectionObserver (?respaldo lo fuerza).
+    (function (r) {
+      var tl = !/[?&]respaldo\b/.test(location.search) && window.CSS && CSS.supports && CSS.supports('animation-timeline: view()');
+      r.className += ' js ' + (tl ? 'tl' : 'no-tl');
+    })(document.documentElement);
+  </script>
+  <script src="script.js?v=5885b2618c" defer></script>
 </head>
 <body>
   <svg class="sprite" aria-hidden="true">
@@ -44,11 +52,8 @@
     <symbol id="i-cerrar" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
     <symbol id="i-izq" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
     <symbol id="i-der" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
-    <symbol id="i-ampliar" viewBox="0 0 24 24"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></symbol>
     <symbol id="i-instagram" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><path d="M17.5 6.5h.01"/></symbol>
     <symbol id="i-facebook" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></symbol>
-    <symbol id="i-pausa" viewBox="0 0 24 24"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></symbol>
-    <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4v16l13-8z"/></symbol>
     <symbol id="i-fuego" viewBox="0 0 24 24"><path d="M12 22c4 0 7-2.7 7-6.6 0-3-1.6-5.4-3.6-7.3.2 2-1 3.4-2.4 3.4C14.2 8 13 5 10 2c.3 3-2.6 5.4-4 7.8A7.7 7.7 0 0 0 5 15.4C5 19.3 8 22 12 22z"/></symbol>
     <symbol id="i-pago" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 12h.01"/><path d="M18 12h.01"/></symbol>
   </svg>
@@ -58,20 +63,17 @@
   <!-- Cinta de emergencia: lo primero que se ve al abrir la página (pedido de Javier, 2026-11-03). -->
   <section class="emergencia" aria-label="Emergencias">
     <div class="wrap emergencia__in">
-      <p class="emergencia__rotulo"><svg class="ic" aria-hidden="true"><use href="#i-alerta"/></svg>Emergencias</p>
+      <p class="emergencia__rotulo rotulo"><svg class="ic" aria-hidden="true"><use href="#i-alerta"/></svg>Emergencias</p>
       <a class="emergencia__132" href="tel:132"><svg class="ic" aria-hidden="true"><use href="#i-fuego"/></svg><span><span class="emergencia__cuando">¿Fuego o humo? </span><strong>Bomberos 132</strong></span></a>
       <a class="emergencia__ver" href="#urgencias"><span><span class="emergencia__cuando">¿Chispas u olor a quemado? </span>Qué hacer</span><svg class="ic" aria-hidden="true"><use href="#i-flecha"/></svg></a>
     </div>
   </section>
 
-  <header class="topbar">
-    <div class="wrap topbar__in">
+  <header class="cab">
+    <div class="wrap cab__in">
       <a class="marca" href="#inicio" aria-label="Javier, electricista. Ir al inicio">
-        <svg class="marca__icono" viewBox="0 0 32 32" aria-hidden="true">
-          <rect width="32" height="32" rx="8" fill="#FFC21A"/>
-          <path d="M18 4 8 18h7l-1 10 10-14h-7l1-10z" fill="#16181D"/>
-        </svg>
-        <span class="marca__texto"><strong>Javier</strong><span>Electricista · Temuco</span></span>
+        <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#FFC21A"/><path d="M18 4 8 18h7l-1 10 10-14h-7l1-10z" fill="#16181D"/></svg>
+        <span><strong>Javier</strong><small>Electricista · Temuco</small></span>
       </a>
       <nav class="nav" aria-label="Secciones">
         <a href="#servicios">Servicios</a>
@@ -81,7 +83,8 @@
         <a href="#preguntas">Preguntas</a>
         <a href="#contacto">Contacto</a>
       </nav>
-      <a class="btn btn--ghost btn--sm topbar__llamar" data-tel href="#contacto" aria-label="Llamar">
+      <p class="cab__lamina rotulo" data-lamina aria-hidden="true">Lámina E-01 · Portada</p>
+      <a class="btn btn--linea btn--sm cab__llamar" data-tel href="#contacto" aria-label="Llamar">
         <svg class="ic" aria-hidden="true"><use href="#i-tel"/></svg>
       </a>
       <a class="btn btn--signal btn--sm" data-wa href="#contacto">
@@ -91,178 +94,118 @@
   </header>
 
   <main id="contenido">
-    <section class="hero" id="inicio">
-      <div class="wrap hero__in">
-        <div class="hero__texto">
+    <!-- E-01 · Portada: el título sube línea por línea y la planta de la casa se dibuja sola. -->
+    <section class="portada" id="inicio" data-lamina-nombre="E-01 · Portada">
+      <div class="wrap portada__in">
+        <div>
           <h1>
-            <span class="hero__kicker">Electricista en Temuco y Padre Las Casas</span>
-            <span class="hero__titulo">¿Saltó el automático o necesitas un enchufe nuevo?</span>
+            <span class="rotulo portada__rotulo entra" style="--d:0ms"><span class="cod" data-cod="E-01 ·" aria-hidden="true"></span>Electricista en Temuco y Padre Las Casas</span>
+            <span class="titulo">
+              <span class="linea"><span style="--l:0">¿Saltó el</span></span>
+              <span class="linea"><span style="--l:1"><span class="marcador">automático</span></span></span>
+              <span class="linea"><span style="--l:2">o necesitas un</span></span>
+              <span class="linea"><span style="--l:3"><span class="marcador">enchufe</span> nuevo?</span></span>
+            </span>
           </h1>
-          <p class="hero__lead">Soy Javier, técnico en electricidad con <span data-anios>16</span> años de oficio. Reparo fallas, hago instalaciones nuevas y trabajos de iluminación en casas y locales. Mándame una foto por WhatsApp y te digo cómo lo resolvemos.</p>
-          <div class="hero__acciones" data-acciones>
-            <a class="btn btn--signal btn--lg" data-wa href="#contacto">
-              <svg class="ic" aria-hidden="true"><use href="#i-chat"/></svg>Escribir por WhatsApp
-            </a>
-            <a class="btn btn--ghost btn--lg" data-tel href="#contacto">
-              <svg class="ic" aria-hidden="true"><use href="#i-tel"/></svg>Llamar
-            </a>
+          <p class="cota entra" style="--d:900ms"><span><span data-anios>16</span> años de oficio · desde 2010</span></p>
+          <p class="lead entra" style="--d:600ms">Soy Javier, técnico en electricidad. Reparo fallas, hago instalaciones nuevas y trabajos de iluminación en casas y locales. Mándame una foto por WhatsApp y te digo cómo lo resolvemos.</p>
+          <div class="acciones entra" style="--d:750ms" data-acciones>
+            <a class="btn btn--signal" data-wa href="#contacto"><svg class="ic" aria-hidden="true"><use href="#i-chat"/></svg>Escribir por WhatsApp</a>
+            <a class="btn btn--linea" data-tel href="#contacto"><svg class="ic" aria-hidden="true"><use href="#i-tel"/></svg>Llamar</a>
           </div>
-          <p class="estado" data-estado>
+          <p class="estado entra" style="--d:900ms" data-estado>
             <span class="estado__luz" aria-hidden="true"></span>
             <span data-estado-texto><span data-horario>Lunes a viernes de 10:00 a 22:00 y sábado de 08:00 a 13:00</span></span>
           </p>
         </div>
 
-        <div class="hero__tablero" aria-hidden="true">
-          <svg class="tablero" data-tablero viewBox="0 0 340 400">
-            <defs>
-              <linearGradient id="g-caja" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stop-color="#2B3039"/>
-                <stop offset="1" stop-color="#1F232A"/>
-              </linearGradient>
-              <linearGradient id="g-modulo" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stop-color="#F5F2EB"/>
-                <stop offset="1" stop-color="#DAD5CA"/>
-              </linearGradient>
-            </defs>
+        <figure class="plano" aria-hidden="true">
+          <div class="plano__cab rotulo"><span>Planta · Instalación tipo</span><span>Esc. 1:50</span></div>
+          <svg viewBox="0 0 400 300">
+            <path class="muro trazo" pathLength="1" style="--dur:1.1s;--d:200ms" d="M100 280 H20 V20 H380 V280 H150"/>
+            <path class="muro trazo" pathLength="1" style="--dur:.6s;--d:700ms" d="M240 20 V150"/>
+            <path class="puerta trazo" pathLength="1" style="--dur:.6s;--d:1000ms" d="M100 280 V230 A50 50 0 0 1 150 280"/>
 
-            <rect x="10" y="10" width="320" height="380" rx="18" fill="url(#g-caja)" stroke="#3A404B" stroke-width="2"/>
-            <g class="tornillos">
-              <circle cx="28" cy="28" r="5"/><circle cx="312" cy="28" r="5"/>
-              <circle cx="28" cy="372" r="5"/><circle cx="312" cy="372" r="5"/>
-              <path d="M25.5 25.5l5 5M309.5 25.5l5 5M25.5 369.5l5 5M309.5 369.5l5 5"/>
-            </g>
+            <path class="circuito trazo" pathLength="1" style="--dur:.9s;--d:1300ms" d="M64 60 Q110 66 126 110"/>
+            <path class="circuito trazo" pathLength="1" style="--dur:.9s;--d:1500ms" d="M134 130 Q148 200 163 250"/>
+            <path class="circuito trazo" pathLength="1" style="--dur:.9s;--d:1600ms" d="M141 116 Q230 70 299 86"/>
+            <path class="circuito trazo" pathLength="1" style="--dur:.9s;--d:1800ms" d="M40 70 Q28 140 31 192"/>
+            <path class="circuito trazo" pathLength="1" style="--dur:1.1s;--d:1900ms" d="M60 70 Q190 220 296 264"/>
+            <path class="circuito trazo" pathLength="1" style="--dur:.8s;--d:2100ms" d="M304 264 Q350 236 366 206"/>
 
-            <rect x="110" y="36" width="120" height="22" rx="4" fill="#13161A" stroke="#353B46"/>
-            <text x="170" y="51" text-anchor="middle" class="tab-rotulo">TABLERO GENERAL</text>
+            <g class="simbolo" style="--d:1250ms"><path d="M36 52 h28 v18 h-28 Z"/></g>
+            <path class="relleno" style="--d:1250ms" d="M36 70 L64 52 V70 Z"/>
+            <g class="simbolo" style="--d:1550ms"><path d="M120 120 a10 10 0 1 0 20 0 a10 10 0 1 0 -20 0"/><path d="M123 113 l14 14 M137 113 l-14 14"/></g>
+            <g class="simbolo" style="--d:1750ms"><path d="M300 90 a10 10 0 1 0 20 0 a10 10 0 1 0 -20 0"/><path d="M303 83 l14 14 M317 83 l-14 14"/></g>
+            <g class="simbolo" style="--d:1700ms"><path d="M161 255 a4 4 0 1 0 8 0 a4 4 0 1 0 -8 0"/><path d="M168 252 l10 -10 l4 4"/></g>
+            <g class="simbolo" style="--d:2000ms"><path d="M20 190 A10 10 0 0 1 20 210"/><path d="M29 196 h6 M29 204 h6"/></g>
+            <g class="simbolo" style="--d:2150ms"><path d="M290 280 A10 10 0 0 1 310 280"/><path d="M296 271 v-6 M304 271 v-6"/></g>
+            <g class="simbolo" style="--d:2300ms"><path d="M380 190 A10 10 0 0 0 380 210"/><path d="M371 196 h-6 M371 204 h-6"/></g>
 
-            <!-- Fila 1: general, diferencial y luz piloto -->
-            <rect x="26" y="112" width="288" height="12" fill="#3A404B"/>
-            <g>
-              <rect x="34" y="72" width="104" height="92" rx="5" fill="url(#g-modulo)"/>
-              <text x="86" y="88" text-anchor="middle" class="tab-dato">2×40 A</text>
-              <rect x="61" y="100" width="50" height="44" rx="3" fill="#2A2E36"/>
-              <g class="palanca" style="--i:0">
-                <rect x="64" y="102" width="44" height="20" rx="2.5" fill="#FFC21A"/>
-                <path d="M86 105v14" stroke="#16181D" stroke-opacity=".35" stroke-width="1.5"/>
-              </g>
-            </g>
-            <g>
-              <rect x="146" y="72" width="104" height="92" rx="5" fill="url(#g-modulo)"/>
-              <text x="156" y="88" class="tab-dato">30 mA</text>
-              <rect x="224" y="78" width="16" height="13" rx="2" fill="#FFC21A"/>
-              <text x="232" y="88" text-anchor="middle" class="tab-dato tab-dato--oscuro">T</text>
-              <rect x="173" y="100" width="50" height="44" rx="3" fill="#2A2E36"/>
-              <g class="palanca" style="--i:1">
-                <rect x="176" y="102" width="44" height="20" rx="2.5" fill="#1A1C21"/>
-                <path d="M198 105v14" stroke="#FFFFFF" stroke-opacity=".18" stroke-width="1.5"/>
-              </g>
-            </g>
-            <g>
-              <rect x="258" y="72" width="48" height="92" rx="5" fill="url(#g-modulo)"/>
-              <text x="282" y="88" text-anchor="middle" class="tab-dato">230 V</text>
-              <circle cx="282" cy="122" r="13" fill="#2A2E36"/>
-              <circle cx="282" cy="122" r="9" class="led"/>
-            </g>
-            <rect x="34" y="172" width="272" height="17" rx="3" fill="#13161A"/>
-            <g class="tab-etiqueta" text-anchor="middle">
-              <text x="86" y="184">GENERAL</text>
-              <text x="198" y="184">DIFERENCIAL</text>
-              <text x="282" y="184">PILOTO</text>
-            </g>
-
-            <!-- Fila 2: circuitos -->
-            <rect x="26" y="240" width="288" height="12" fill="#3A404B"/>
-            <g>
-              <rect x="34" y="200" width="48" height="92" rx="5" fill="url(#g-modulo)"/>
-              <text x="58" y="216" text-anchor="middle" class="tab-dato">C10</text>
-              <rect x="49" y="228" width="18" height="44" rx="3" fill="#2A2E36"/>
-              <rect class="palanca" style="--i:2" x="51" y="230" width="14" height="20" rx="2" fill="#1A1C21"/>
-            </g>
-            <g>
-              <rect x="90" y="200" width="48" height="92" rx="5" fill="url(#g-modulo)"/>
-              <text x="114" y="216" text-anchor="middle" class="tab-dato">C16</text>
-              <rect x="105" y="228" width="18" height="44" rx="3" fill="#2A2E36"/>
-              <rect class="palanca" style="--i:3" x="107" y="230" width="14" height="20" rx="2" fill="#1A1C21"/>
-            </g>
-            <g>
-              <rect x="146" y="200" width="48" height="92" rx="5" fill="url(#g-modulo)"/>
-              <text x="170" y="216" text-anchor="middle" class="tab-dato">C20</text>
-              <rect x="161" y="228" width="18" height="44" rx="3" fill="#2A2E36"/>
-              <rect class="palanca" style="--i:4" x="163" y="230" width="14" height="20" rx="2" fill="#1A1C21"/>
-            </g>
-            <g>
-              <rect x="202" y="200" width="48" height="92" rx="5" fill="url(#g-modulo)"/>
-              <text x="226" y="216" text-anchor="middle" class="tab-dato">C16</text>
-              <rect x="217" y="228" width="18" height="44" rx="3" fill="#2A2E36"/>
-              <rect class="palanca" style="--i:5" x="219" y="230" width="14" height="20" rx="2" fill="#1A1C21"/>
-            </g>
-            <g>
-              <rect x="258" y="200" width="48" height="92" rx="5" fill="url(#g-modulo)"/>
-              <text x="282" y="216" text-anchor="middle" class="tab-dato">C10</text>
-              <rect x="273" y="228" width="18" height="44" rx="3" fill="#2A2E36"/>
-              <rect class="palanca" style="--i:6" x="275" y="230" width="14" height="20" rx="2" fill="#1A1C21"/>
-            </g>
-            <rect x="34" y="300" width="272" height="17" rx="3" fill="#13161A"/>
-            <g class="tab-etiqueta" text-anchor="middle">
-              <text x="58" y="312">LUCES</text>
-              <text x="114" y="312">ENCHUFES</text>
-              <text x="170" y="312">COCINA</text>
-              <text x="226" y="312">BAÑO</text>
-              <text x="282" y="312">PATIO</text>
-            </g>
-
-            <rect x="34" y="330" width="272" height="30" rx="6" fill="#13161A" stroke="#353B46"/>
-            <text x="48" y="349.5" class="tab-estado" data-estado-tablero>EN SERVICIO</text>
-            <text x="292" y="349.5" text-anchor="end" class="tab-horas" data-horario-hoy>L–V 10–22 · SÁB 8–13</text>
+            <text x="120" y="190" style="--d:2400ms">LIVING</text>
+            <text x="292" y="200" style="--d:2450ms">COCINA</text>
+            <text class="c" x="196" y="80" style="--d:2500ms">C1</text>
+            <text class="c" x="168" y="200" style="--d:2550ms">C2</text>
           </svg>
-        </div>
+          <ul class="simbologia rotulo">
+            <li><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/></svg>Punto de luz</li>
+            <li><svg viewBox="0 0 24 24"><circle cx="8" cy="16" r="3"/><path d="M10.5 13.5 18 6l3 3"/></svg>Interruptor</li>
+            <li><svg viewBox="0 0 24 24"><path d="M4 4a8 8 0 0 1 0 16"/><path d="M14 9h6M14 15h6"/></svg>Enchufe</li>
+            <li><svg viewBox="0 0 24 24"><path d="M3 7h18v10H3z"/><path d="M3 17 21 7v10z" fill="currentColor" stroke="none" style="color:var(--plano)"/></svg>Tablero</li>
+          </ul>
+        </figure>
       </div>
 
-      <div class="wrap">
-        <ul class="hero__datos">
-          <li><svg class="ic" aria-hidden="true"><use href="#i-reloj"/></svg><span><strong>Urgencias</strong> de lunes a sábado</span></li>
-          <li><svg class="ic" aria-hidden="true"><use href="#i-casa"/></svg><span><strong>Casas y locales</strong> en Temuco y Padre Las Casas</span></li>
-          <li><svg class="ic" aria-hidden="true"><use href="#i-presupuesto"/></svg><span><strong>Presupuesto</strong> antes de empezar</span></li>
-        </ul>
+      <div class="franja" aria-hidden="true">
+        <p class="franja__pista">
+          <span>Fallas y urgencias</span><b>⊗</b><span>Enchufes e interruptores</span><b>⊗</b><span>Circuitos nuevos</span><b>⊗</b><span>Iluminación LED</span><b>⊗</b><span>Extractores</span><b>⊗</b><span>Tableros</span><b>⊗</b><span>Mantención</span><b>⊗</b>
+          <span>Fallas y urgencias</span><b>⊗</b><span>Enchufes e interruptores</span><b>⊗</b><span>Circuitos nuevos</span><b>⊗</b><span>Iluminación LED</span><b>⊗</b><span>Extractores</span><b>⊗</b><span>Tableros</span><b>⊗</b><span>Mantención</span><b>⊗</b>
+        </p>
       </div>
     </section>
 
-    <section class="seccion seccion--alt" id="tu-caso" aria-labelledby="t-casos">
+    <!-- E-02 · Tu caso: cada caso abre WhatsApp con el mensaje listo (lo arma script.js). -->
+    <section class="seccion" id="tu-caso" aria-labelledby="t-casos" data-lamina-nombre="E-02 · Tu caso">
       <div class="wrap">
-        <header class="seccion__cabeza">
-          <p class="etiqueta"><span>C1</span>Tu caso</p>
+        <header class="cabeza" data-revela>
+          <p class="rotulo">E-02 · Tu caso</p>
           <h2 id="t-casos">¿Qué te pasó?</h2>
           <p>Toca tu caso y se abre WhatsApp con el mensaje listo. Agrega una foto y te respondo.</p>
         </header>
         <div class="casos">
-          <a class="caso caso--alerta" data-wa data-wa-texto="Huele a quemado o hay chispas en un enchufe." href="#contacto">
-            <span class="caso__ic"><svg class="ic" aria-hidden="true"><use href="#i-alerta"/></svg></span>
+          <a class="caso caso--alerta" data-wa data-wa-texto="Huele a quemado o hay chispas en un enchufe." href="#contacto" data-revela style="--i:0">
+            <svg class="ic caso__ic" aria-hidden="true"><use href="#i-alerta"/></svg>
+            <span class="caso__cod rotulo" aria-hidden="true">C-01 · Urgente</span>
             <span class="caso__txt">Huele a quemado o hay chispas</span>
             <svg class="ic caso__flecha" aria-hidden="true"><use href="#i-flecha"/></svg>
           </a>
-          <a class="caso caso--urgente" data-wa data-wa-texto="Me salta el automático o el diferencial." href="#contacto">
-            <span class="caso__ic"><svg class="ic" aria-hidden="true"><use href="#i-rayo"/></svg></span>
+          <a class="caso caso--urgente" data-wa data-wa-texto="Me salta el automático o el diferencial." href="#contacto" data-revela style="--i:1">
+            <svg class="ic caso__ic" aria-hidden="true"><use href="#i-rayo"/></svg>
+            <span class="caso__cod rotulo" aria-hidden="true">C-02 · Falla</span>
             <span class="caso__txt">Salta el automático o el diferencial</span>
             <svg class="ic caso__flecha" aria-hidden="true"><use href="#i-flecha"/></svg>
           </a>
-          <a class="caso" data-wa data-wa-texto="Se me cortó la luz en una parte de la casa." href="#contacto">
-            <span class="caso__ic"><svg class="ic" aria-hidden="true"><use href="#i-corte"/></svg></span>
+          <a class="caso" data-wa data-wa-texto="Se me cortó la luz en una parte de la casa." href="#contacto" data-revela style="--i:2">
+            <svg class="ic caso__ic" aria-hidden="true"><use href="#i-corte"/></svg>
+            <span class="caso__cod rotulo" aria-hidden="true">C-03 · Falla</span>
             <span class="caso__txt">Se cortó la luz en una parte de la casa</span>
             <svg class="ic caso__flecha" aria-hidden="true"><use href="#i-flecha"/></svg>
           </a>
-          <a class="caso" data-wa data-wa-texto="Necesito instalar enchufes o circuitos nuevos." href="#contacto">
-            <span class="caso__ic"><svg class="ic" aria-hidden="true"><use href="#i-enchufe"/></svg></span>
+          <a class="caso" data-wa data-wa-texto="Necesito instalar enchufes o circuitos nuevos." href="#contacto" data-revela style="--i:3">
+            <svg class="ic caso__ic" aria-hidden="true"><use href="#i-enchufe"/></svg>
+            <span class="caso__cod rotulo" aria-hidden="true">C-04 · Instalación</span>
             <span class="caso__txt">Necesito enchufes o circuitos nuevos</span>
             <svg class="ic caso__flecha" aria-hidden="true"><use href="#i-flecha"/></svg>
           </a>
-          <a class="caso" data-wa data-wa-texto="Quiero cambiar la iluminación a LED." href="#contacto">
-            <span class="caso__ic"><svg class="ic" aria-hidden="true"><use href="#i-ampolleta"/></svg></span>
+          <a class="caso" data-wa data-wa-texto="Quiero cambiar la iluminación a LED." href="#contacto" data-revela style="--i:4">
+            <svg class="ic caso__ic" aria-hidden="true"><use href="#i-ampolleta"/></svg>
+            <span class="caso__cod rotulo" aria-hidden="true">C-05 · Iluminación</span>
             <span class="caso__txt">Quiero cambiar a luces LED</span>
             <svg class="ic caso__flecha" aria-hidden="true"><use href="#i-flecha"/></svg>
           </a>
-          <a class="caso" data-wa data-wa-texto="Quiero una revisión de mi instalación eléctrica." href="#contacto">
-            <span class="caso__ic"><svg class="ic" aria-hidden="true"><use href="#i-escudo"/></svg></span>
+          <a class="caso" data-wa data-wa-texto="Quiero una revisión de mi instalación eléctrica." href="#contacto" data-revela style="--i:5">
+            <svg class="ic caso__ic" aria-hidden="true"><use href="#i-escudo"/></svg>
+            <span class="caso__cod rotulo" aria-hidden="true">C-06 · Mantención</span>
             <span class="caso__txt">Quiero una revisión de la instalación</span>
             <svg class="ic caso__flecha" aria-hidden="true"><use href="#i-flecha"/></svg>
           </a>
@@ -270,157 +213,165 @@
       </div>
     </section>
 
-    <section class="seccion" id="servicios" aria-labelledby="t-servicios">
+    <!-- E-03 · Servicios: fichas técnicas; el símbolo de cada una se dibuja al aparecer. -->
+    <section class="seccion" id="servicios" aria-labelledby="t-servicios" data-lamina-nombre="E-03 · Servicios">
       <div class="wrap">
-        <header class="seccion__cabeza">
-          <p class="etiqueta"><span>C2</span>Servicios</p>
+        <header class="cabeza" data-revela>
+          <p class="rotulo">E-03 · Servicios</p>
           <h2 id="t-servicios">Lo que hago</h2>
           <p>Trabajos eléctricos para casas, departamentos y locales comerciales.</p>
         </header>
-
-        <div class="servicios" data-carrusel="Servicios">
-          <article class="servicio servicio--urgente">
-            <div class="servicio__icono"><svg class="ic" aria-hidden="true"><use href="#i-rayo"/></svg></div>
-            <h3>Fallas y urgencias</h3>
-            <p>Cuando algo dejó de funcionar o no se ve bien.</p>
-            <ul>
-              <li>El automático o el diferencial salta</li>
-              <li>Enchufes o luces que dejaron de funcionar</li>
-              <li>Olor a quemado, chispas o cables calientes</li>
-              <li>Cortes de luz en una parte de la casa</li>
-            </ul>
-            <p class="servicio__nota">Urgencias en mi horario: <span data-horario-corto>Lun a vie 10:00–22:00 · Sáb 08:00–13:00</span>.</p>
+        <div class="servicios">
+          <article class="servicio" data-revela data-vista style="--i:0">
+            <p class="servicio__cab rotulo"><span>S-01</span><span>Urgencias</span></p>
+            <div class="servicio__cuerpo">
+              <h3>Fallas y urgencias</h3>
+              <svg class="servicio__simbolo" viewBox="0 0 56 56" aria-hidden="true"><path class="trazo" pathLength="1" d="M31 6 13 31h14l-3 19 19-27H29l2-17z"/></svg>
+              <p>Cuando algo dejó de funcionar o no se ve bien.</p>
+              <ul>
+                <li>El automático o el diferencial salta</li>
+                <li>Enchufes o luces que dejaron de funcionar</li>
+                <li>Olor a quemado, chispas o cables calientes</li>
+                <li>Cortes de luz en una parte de la casa</li>
+              </ul>
+              <p class="servicio__nota">Urgencias en mi horario: <span data-horario-corto>Lun a vie 10:00–22:00 · Sáb 08:00–13:00</span>.</p>
+            </div>
           </article>
-
-          <article class="servicio">
-            <div class="servicio__icono"><svg class="ic" aria-hidden="true"><use href="#i-enchufe"/></svg></div>
-            <h3>Instalaciones nuevas</h3>
-            <p>Cuando necesitas más enchufes o estás ampliando.</p>
-            <ul>
-              <li>Enchufes, interruptores y circuitos nuevos</li>
-              <li>Ampliaciones y remodelaciones</li>
-              <li>Conexión de encimeras, hornos y termos eléctricos</li>
-              <li>Extractores de baño y cocina</li>
-              <li>Instalaciones para locales comerciales</li>
-            </ul>
-            <p class="servicio__nota">Casas, departamentos y locales.</p>
+          <article class="servicio" data-revela data-vista style="--i:1">
+            <p class="servicio__cab rotulo"><span>S-02</span><span>Instalación</span></p>
+            <div class="servicio__cuerpo">
+              <h3>Instalaciones nuevas</h3>
+              <svg class="servicio__simbolo" viewBox="0 0 56 56" aria-hidden="true"><path class="trazo" pathLength="1" d="M14 8a20 20 0 0 1 0 40"/><path class="trazo" pathLength="1" d="M38 20h12M38 36h12"/></svg>
+              <p>Cuando necesitas más enchufes o estás ampliando.</p>
+              <ul>
+                <li>Enchufes, interruptores y circuitos nuevos</li>
+                <li>Ampliaciones y remodelaciones</li>
+                <li>Conexión de encimeras, hornos y termos eléctricos</li>
+                <li>Extractores de baño y cocina</li>
+                <li>Instalaciones para locales comerciales</li>
+              </ul>
+              <p class="servicio__nota">Casas, departamentos y locales.</p>
+            </div>
           </article>
-
-          <article class="servicio">
-            <div class="servicio__icono"><svg class="ic" aria-hidden="true"><use href="#i-ampolleta"/></svg></div>
-            <h3>Iluminación y mantención</h3>
-            <p>Para ver mejor y adelantarte a los problemas.</p>
-            <ul>
-              <li>Cambio a ampolletas y equipos LED</li>
-              <li>Focos exteriores y sensores de movimiento</li>
-              <li>Cambio de enchufes e interruptores gastados</li>
-              <li>Revisión preventiva de la instalación</li>
-            </ul>
-            <p class="servicio__nota">Interior y exterior.</p>
+          <article class="servicio" data-revela data-vista style="--i:2">
+            <p class="servicio__cab rotulo"><span>S-03</span><span>Iluminación</span></p>
+            <div class="servicio__cuerpo">
+              <h3>Iluminación y mantención</h3>
+              <svg class="servicio__simbolo" viewBox="0 0 56 56" aria-hidden="true"><path class="trazo" pathLength="1" d="M8 28a20 20 0 1 0 40 0a20 20 0 1 0 -40 0"/><path class="trazo" pathLength="1" d="M14 14l28 28M42 14 14 42"/></svg>
+              <p>Para ver mejor y adelantarte a los problemas.</p>
+              <ul>
+                <li>Cambio a ampolletas y equipos LED</li>
+                <li>Focos exteriores y sensores de movimiento</li>
+                <li>Cambio de enchufes e interruptores gastados</li>
+                <li>Revisión preventiva de la instalación</li>
+              </ul>
+              <p class="servicio__nota">Interior y exterior.</p>
+            </div>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="sobre" id="sobre-mi" aria-labelledby="t-sobre">
-      <div class="wrap sobre__in">
-        <figure class="sobre__foto">
+    <!-- E-04 · Sobre mí: la foto la pone script.js (CONFIG.fotoPerfil) y se «imprime» como un plotter. -->
+    <section class="seccion" id="sobre-mi" aria-labelledby="t-sobre" data-lamina-nombre="E-04 · Sobre mí">
+      <div class="wrap sobre">
+        <header class="cabeza sobre__cabeza" data-revela>
+          <p class="rotulo">E-04 · Sobre mí</p>
+          <h2 id="t-sobre">Soy Javier, electricista en Temuco</h2>
+        </header>
+        <figure class="sobre__foto" data-revela data-vista>
+          <p class="sobre__cab rotulo" aria-hidden="true"><span>Det. A</span><span>En terreno</span></p>
           <div class="sobre__marco" data-foto-perfil>
             <span class="sobre__inicial" aria-hidden="true">J</span>
           </div>
           <figcaption><strong>Javier</strong> · Técnico en electricidad</figcaption>
         </figure>
-        <div>
-          <p class="etiqueta etiqueta--clara"><span>C3</span>Sobre mí</p>
-          <h2 id="t-sobre">Soy Javier, electricista en Temuco</h2>
-          <p class="sobre__lead">Trabajo en el área eléctrica desde 2010. Soy técnico de nivel medio en electricidad, titulado en el Liceo Industrial de Temuco, y maestro eléctrico de primera. Sigo capacitándome con cursos, y buena parte de lo que sé lo aprendí en terreno, trabajo a trabajo.</p>
-          <dl class="sobre__datos">
-            <div><dt><span data-anios>16</span> años</dt><dd>de oficio, desde 2010</dd></div>
+        <div class="sobre__texto">
+          <p class="sobre__lead" data-revela>Trabajo en el área eléctrica desde 2010. Soy técnico de nivel medio en electricidad, titulado en el Liceo Industrial de Temuco, y maestro eléctrico de primera. Sigo capacitándome con cursos, y buena parte de lo que sé lo aprendí en terreno, trabajo a trabajo.</p>
+          <dl class="datos" data-revela>
+            <div><dt><span data-anios data-contar>16</span> años</dt><dd>de oficio, desde 2010</dd></div>
             <div><dt>Técnico</dt><dd>en electricidad, titulado en 2011</dd></div>
             <div><dt>Maestro</dt><dd>eléctrico de primera</dd></div>
           </dl>
-          <h3 class="sobre__subtitulo">Por qué trabajar conmigo</h3>
-          <ul class="sobre__razones">
-            <li><svg class="ic" aria-hidden="true"><use href="#i-reloj"/></svg><span><strong>Puntualidad</strong>Llego a la hora acordada, y si me atraso, te aviso.</span></li>
-            <li><svg class="ic" aria-hidden="true"><use href="#i-chat"/></svg><span><strong>Te explico lo que hago</strong>Sabrás qué fallaba y qué se reparó.</span></li>
-            <li><svg class="ic" aria-hidden="true"><use href="#i-casa"/></svg><span><strong>Trabajo limpio y ordenado</strong>Cuido tu casa o local y dejo todo limpio al terminar.</span></li>
-            <li><svg class="ic" aria-hidden="true"><use href="#i-escudo"/></svg><span><strong>Materiales de calidad</strong>Uso materiales certificados, sin atajos.</span></li>
+          <h3 class="sobre__subtitulo rotulo">Por qué trabajar conmigo</h3>
+          <ul class="razones">
+            <li data-revela style="--i:0"><svg class="ic" aria-hidden="true"><use href="#i-reloj"/></svg><span><strong>Puntualidad</strong>Llego a la hora acordada, y si me atraso, te aviso.</span></li>
+            <li data-revela style="--i:1"><svg class="ic" aria-hidden="true"><use href="#i-chat"/></svg><span><strong>Te explico lo que hago</strong>Sabrás qué fallaba y qué se reparó.</span></li>
+            <li data-revela style="--i:2"><svg class="ic" aria-hidden="true"><use href="#i-casa"/></svg><span><strong>Trabajo limpio y ordenado</strong>Cuido tu casa o local y dejo todo limpio al terminar.</span></li>
+            <li data-revela style="--i:3"><svg class="ic" aria-hidden="true"><use href="#i-escudo"/></svg><span><strong>Materiales de calidad</strong>Uso materiales certificados, sin atajos.</span></li>
           </ul>
         </div>
       </div>
     </section>
 
-    <section class="seccion seccion--alt" id="urgencias" aria-labelledby="t-urgencias">
+    <!-- E-05 · Urgencias: qué hacer de inmediato y mientras llego; Bomberos 132 solo si hay fuego o humo. -->
+    <section class="seccion" id="urgencias" aria-labelledby="t-urgencias" data-lamina-nombre="E-05 · Urgencias">
       <div class="wrap">
-        <header class="seccion__cabeza">
-          <p class="etiqueta"><span>C4</span>Urgencias</p>
+        <header class="cabeza" data-revela>
+          <p class="rotulo">E-05 · Urgencias</p>
           <h2 id="t-urgencias">¿Es urgente? Revisa esto primero</h2>
         </header>
-
         <div class="urgencias">
-          <div class="urgencias__col urgencias__col--ya">
+          <div class="urgencia urgencia--ya" data-revela>
+            <p class="urgencia__cab rotulo" aria-hidden="true"><span>U-01</span><span>De inmediato</span></p>
             <h3>Llámame de inmediato si…</h3>
-            <ul class="lista-alerta">
+            <ul>
               <li>Huele a quemado o sale humo de un enchufe.</li>
               <li>Un enchufe o interruptor está caliente o hace chispas.</li>
               <li>El diferencial salta y no se puede volver a subir.</li>
               <li>Hay cables pelados, mojados o derretidos.</li>
             </ul>
-            <div class="urgencias__botones">
-              <a class="btn btn--dark" data-tel href="#contacto">
-                <svg class="ic" aria-hidden="true"><use href="#i-tel"/></svg>Llamar a Javier
-              </a>
-              <a class="btn btn--bomberos" href="tel:132">
-                <svg class="ic" aria-hidden="true"><use href="#i-fuego"/></svg>¿Fuego o humo? Bomberos 132
-              </a>
+            <div class="acciones">
+              <a class="btn btn--signal" data-tel href="#contacto"><svg class="ic" aria-hidden="true"><use href="#i-tel"/></svg>Llamar a Javier</a>
+              <a class="btn btn--bomberos" href="tel:132"><svg class="ic" aria-hidden="true"><use href="#i-fuego"/></svg>¿Fuego o humo? Bomberos 132</a>
             </div>
-            <p class="urgencias__nota">El 132 es el número de emergencia de Bomberos de Chile. Úsalo solo si hay fuego o humo.</p>
+            <p class="urgencia__nota">El 132 es el número de emergencia de Bomberos de Chile. Úsalo solo si hay fuego o humo.</p>
           </div>
-
-          <div class="urgencias__col">
+          <div class="urgencia" data-revela style="--i:1">
+            <p class="urgencia__cab rotulo" aria-hidden="true"><span>U-02</span><span>Mientras llego</span></p>
             <h3>Mientras llego</h3>
-            <ol class="pasos-seguridad">
+            <ol>
               <li><span><strong>Baja el automático general</strong> del tablero, si puedes hacerlo sin riesgo.</span></li>
               <li><span><strong>Si no llegas al tablero o la luz no se corta</strong>, baja el automático de la caja del medidor (empalme), sin abrir ni manipular el medidor. Si aun así sigue habiendo energía, llama a tu compañía distribuidora de electricidad.</span></li>
               <li><span><strong>No toques</strong> cables ni enchufes dañados, y nunca con las manos mojadas.</span></li>
               <li><span><strong>Si hay fuego</strong>, no le eches agua: sal de la casa y llama a Bomberos al <a href="tel:132">132</a>.</span></li>
             </ol>
-            <p class="urgencias__barrio"><strong>¿Se cortó la luz en todo el barrio?</strong> Es un corte de la compañía eléctrica y no hace falta un electricista: llama a tu distribuidora.</p>
           </div>
+          <p class="urgencias__barrio" data-revela><strong>¿Se cortó la luz en todo el barrio?</strong> Es un corte de la compañía eléctrica y no hace falta un electricista: llama a tu distribuidora.</p>
         </div>
       </div>
     </section>
 
-    <section class="seccion" id="como-trabajo" aria-labelledby="t-proceso">
+    <!-- E-06 · Cómo trabajo: los 4 pasos como un circuito que se cierra al bajar. -->
+    <section class="seccion" id="como-trabajo" aria-labelledby="t-proceso" data-lamina-nombre="E-06 · Cómo trabajo">
       <div class="wrap">
-        <header class="seccion__cabeza">
-          <p class="etiqueta"><span>C5</span>Cómo trabajo</p>
+        <header class="cabeza" data-revela>
+          <p class="rotulo">E-06 · Cómo trabajo</p>
           <h2 id="t-proceso">Sin sorpresas, de principio a fin</h2>
         </header>
-
-        <ol class="proceso">
-          <li>
+        <ol class="proceso" data-vista>
+          <li style="--i:0">
             <span class="proceso__n" aria-hidden="true">1</span>
             <h3>Me escribes</h3>
             <p>Por WhatsApp, con una foto o un video corto del problema. Así llego con lo necesario.</p>
           </li>
-          <li>
+          <li style="--i:1">
             <span class="proceso__n" aria-hidden="true">2</span>
             <h3>Te doy el presupuesto</h3>
             <p>Antes de empezar sabes cuánto cuesta y cuánto demora.</p>
           </li>
-          <li>
+          <li style="--i:2">
             <span class="proceso__n" aria-hidden="true">3</span>
             <h3>Hago el trabajo</h3>
             <p>Con orden y cuidado en tu casa o local, y dejo limpio al terminar.</p>
           </li>
-          <li>
+          <li style="--i:3">
             <span class="proceso__n" aria-hidden="true">4</span>
             <h3>Probamos juntos</h3>
             <p>Revisamos que todo funcione y te explico qué se hizo.</p>
           </li>
         </ol>
-        <ul class="condiciones" data-carrusel="Garantía, pagos y boleta">
+        <ul class="condiciones" data-revela>
           <li><svg class="ic" aria-hidden="true"><use href="#i-escudo"/></svg><span><strong>Garantía de 2 a 6 meses</strong>2 meses en trabajos pequeños y hasta 6 en trabajos eléctricos más complejos.</span></li>
           <li><svg class="ic" aria-hidden="true"><use href="#i-pago"/></svg><span><strong>Efectivo o transferencia</strong>Los medios de pago que acepto.</span></li>
           <li><svg class="ic" aria-hidden="true"><use href="#i-presupuesto"/></svg><span><strong>Boleta de honorarios</strong>Electrónica, emitida en el SII.</span></li>
@@ -428,121 +379,136 @@
       </div>
     </section>
 
-    <section class="seccion seccion--alt" id="trabajos" aria-labelledby="t-trabajos" data-galeria-seccion hidden>
+    <!-- E-07 · Trabajos: las fotos las pone script.js desde CONFIG.trabajos (si no hay fotos, la sección no aparece). -->
+    <section class="seccion" id="trabajos" aria-labelledby="t-trabajos" data-galeria-seccion hidden data-lamina-nombre="E-07 · Trabajos">
       <div class="wrap">
-        <header class="seccion__cabeza">
-          <p class="etiqueta"><span>C6</span>Trabajos</p>
+        <header class="cabeza" data-revela>
+          <p class="rotulo">E-07 · Trabajos</p>
           <h2 id="t-trabajos">Trabajos realizados</h2>
           <p>Algunos de mis trabajos: iluminación, baños, tableros y canalizaciones. Toca una foto para verla en grande.</p>
         </header>
-        <div class="galeria" data-galeria data-carrusel="Fotos de trabajos"></div>
+        <div class="galeria" data-galeria></div>
       </div>
     </section>
 
-    <section class="seccion" id="preguntas" aria-labelledby="t-preguntas">
+    <!-- E-08 · Preguntas frecuentes. -->
+    <section class="seccion" id="preguntas" aria-labelledby="t-preguntas" data-lamina-nombre="E-08 · Preguntas">
       <div class="wrap preguntas">
-        <header class="seccion__cabeza">
-          <p class="etiqueta"><span>C7</span>Preguntas</p>
+        <header class="cabeza" data-revela>
+          <p class="rotulo">E-08 · Preguntas</p>
           <h2 id="t-preguntas">Preguntas frecuentes</h2>
           <p>Lo que más me preguntan antes de agendar.</p>
         </header>
         <div class="faq">
-          <details open>
-            <summary>¿Qué comunas cubres?</summary>
+          <details open data-revela>
+            <summary><span class="faq__cod rotulo" aria-hidden="true">P-01</span>¿Qué comunas cubres?</summary>
             <p>Temuco y Padre Las Casas. Voy a tu casa o local.</p>
           </details>
-          <details>
-            <summary>¿En qué horario atiendes?</summary>
+          <details data-revela>
+            <summary><span class="faq__cod rotulo" aria-hidden="true">P-02</span>¿En qué horario atiendes?</summary>
             <p><span data-horario>Lunes a viernes de 10:00 a 22:00 y sábado de 08:00 a 13:00</span>. Las urgencias, en ese mismo horario. Domingos y feriados no atiendo.</p>
           </details>
-          <details>
-            <summary>¿Cómo te explico el problema?</summary>
+          <details data-revela>
+            <summary><span class="faq__cod rotulo" aria-hidden="true">P-03</span>¿Cómo te explico el problema?</summary>
             <p>Mándame por WhatsApp una foto o un video corto. Así llego con lo necesario.</p>
           </details>
-          <details>
-            <summary>¿Trabajas en locales comerciales?</summary>
+          <details data-revela>
+            <summary><span class="faq__cod rotulo" aria-hidden="true">P-04</span>¿Trabajas en locales comerciales?</summary>
             <p>Sí. Hago instalaciones, iluminación y reparaciones en locales, además de casas y departamentos.</p>
           </details>
-          <details>
-            <summary>¿Tus trabajos tienen garantía?</summary>
+          <details data-revela>
+            <summary><span class="faq__cod rotulo" aria-hidden="true">P-05</span>¿Tus trabajos tienen garantía?</summary>
             <p>Sí. Va desde 2 meses en trabajos pequeños hasta 6 meses en trabajos eléctricos más complejos, según el tipo de trabajo.</p>
           </details>
-          <details>
-            <summary>¿Cómo se paga?</summary>
+          <details data-revela>
+            <summary><span class="faq__cod rotulo" aria-hidden="true">P-06</span>¿Cómo se paga?</summary>
             <p>En efectivo o por transferencia.</p>
           </details>
-          <details>
-            <summary>¿Entregas boleta?</summary>
+          <details data-revela>
+            <summary><span class="faq__cod rotulo" aria-hidden="true">P-07</span>¿Entregas boleta?</summary>
             <p>Sí, boleta de honorarios electrónica, emitida en el SII.</p>
           </details>
         </div>
       </div>
     </section>
 
-    <section class="contacto" id="contacto" aria-labelledby="t-contacto">
-      <div class="wrap contacto__in">
-        <div class="contacto__texto">
-          <p class="etiqueta etiqueta--clara"><span>C8</span>Contacto</p>
+    <!-- E-09 · Contacto: el cajetín del plano, con el estado «Atendiendo ahora» en vivo, y el armador de mensajes. -->
+    <section class="seccion" id="contacto" aria-labelledby="t-contacto" data-lamina-nombre="E-09 · Contacto">
+      <div class="wrap">
+        <header class="cabeza" data-revela>
+          <p class="rotulo">E-09 · Contacto</p>
           <h2 id="t-contacto">Cuéntame qué necesitas</h2>
           <p>Te respondo por WhatsApp. Si es urgente, mejor llámame.</p>
-          <dl class="ficha">
-            <div><dt>Zona</dt><dd>Temuco y Padre Las Casas, a domicilio</dd></div>
-            <div><dt>Horario</dt><dd><span data-horario>Lunes a viernes de 10:00 a 22:00 y sábado de 08:00 a 13:00</span><br><span class="ficha__nota">Domingos y feriados, cerrado</span></dd></div>
-            <div><dt>Teléfono</dt><dd><a data-tel href="#contacto"><span data-tel-texto>+56 9 4296 0390</span></a></dd></div>
-            <div><dt>Pago</dt><dd>Efectivo o transferencia<br><span class="ficha__nota">Boleta de honorarios electrónica</span></dd></div>
-          </dl>
-          <div class="contacto__acciones">
-            <a class="btn btn--signal btn--lg" data-wa href="#contacto">
-              <svg class="ic" aria-hidden="true"><use href="#i-chat"/></svg>Escribir por WhatsApp
-            </a>
-            <a class="btn btn--ghost btn--lg" data-tel href="#contacto">
-              <svg class="ic" aria-hidden="true"><use href="#i-tel"/></svg>Llamar
-            </a>
-          </div>
-          <div class="redes">
-            <p class="redes__titulo">Mira más de mis trabajos en mis redes</p>
-            <div class="redes__lista">
-              <a class="red" data-red href="https://www.instagram.com/javier_tanke/" target="_blank" rel="me noopener">
-                <svg class="ic" aria-hidden="true"><use href="#i-instagram"/></svg><span><strong>Instagram</strong>@javier_tanke</span>
-              </a>
-              <a class="red" data-red href="https://www.facebook.com/javier.ortiz.604903" target="_blank" rel="me noopener">
-                <svg class="ic" aria-hidden="true"><use href="#i-facebook"/></svg><span><strong>Facebook</strong>Javier</span>
-              </a>
+        </header>
+        <div class="contacto">
+          <div class="contacto__datos">
+            <dl class="cajetin" data-revela>
+              <div><dt class="rotulo">Proyecto</dt><dd>Tu casa o local</dd></div>
+              <div><dt class="rotulo">Zona</dt><dd>Temuco y Padre Las Casas, a domicilio</dd></div>
+              <div><dt class="rotulo">Horario</dt><dd><span data-horario>Lunes a viernes de 10:00 a 22:00 y sábado de 08:00 a 13:00</span><span class="cajetin__nota">Domingos y feriados, cerrado</span></dd></div>
+              <div>
+                <dt class="rotulo">Estado</dt>
+                <dd><p class="estado" data-estado><span class="estado__luz" aria-hidden="true"></span><span data-estado-texto><span data-horario-corto>Lun a vie 10:00–22:00 · Sáb 08:00–13:00</span></span></p></dd>
+              </div>
+              <div><dt class="rotulo">Pago</dt><dd>Efectivo o transferencia<span class="cajetin__nota">Boleta de honorarios electrónica</span></dd></div>
+              <div><dt class="rotulo">Responsable</dt><dd>Javier, técnico en electricidad</dd></div>
+              <div class="cajetin__total">
+                <dt class="rotulo">Contacto</dt>
+                <dd>
+                  <a class="cajetin__tel" data-tel href="#contacto"><span data-tel-texto>+56 9 4296 0390</span></a>
+                  <span class="acciones">
+                    <a class="btn btn--signal" data-wa href="#contacto"><svg class="ic" aria-hidden="true"><use href="#i-chat"/></svg>Escribir por WhatsApp</a>
+                    <a class="btn btn--linea" data-tel href="#contacto"><svg class="ic" aria-hidden="true"><use href="#i-tel"/></svg>Llamar</a>
+                  </span>
+                </dd>
+              </div>
+            </dl>
+            <div class="redes" data-revela>
+              <p class="redes__titulo rotulo">Mira más de mis trabajos en mis redes</p>
+              <div class="redes__lista">
+                <a class="red" data-red href="https://www.instagram.com/javier_tanke/" target="_blank" rel="me noopener">
+                  <svg class="ic" aria-hidden="true"><use href="#i-instagram"/></svg><span><strong>Instagram</strong>@javier_tanke</span>
+                </a>
+                <a class="red" data-red href="https://www.facebook.com/javier.ortiz.604903" target="_blank" rel="me noopener">
+                  <svg class="ic" aria-hidden="true"><use href="#i-facebook"/></svg><span><strong>Facebook</strong>Javier</span>
+                </a>
+              </div>
             </div>
           </div>
-        </div>
 
-        <form class="mensaje" data-form-wa>
-          <div>
-            <h3>Arma tu mensaje</h3>
-            <p class="mensaje__ayuda">Se abre WhatsApp con el texto listo; desde ahí puedes adjuntar fotos.</p>
-          </div>
-          <fieldset>
-            <legend>¿Qué necesitas?</legend>
-            <div class="opciones">
-              <label class="opcion"><input type="radio" name="servicio" value="una falla o urgencia"><span>Falla o urgencia</span></label>
-              <label class="opcion"><input type="radio" name="servicio" value="una instalación nueva"><span>Instalación nueva</span></label>
-              <label class="opcion"><input type="radio" name="servicio" value="iluminación"><span>Iluminación</span></label>
-              <label class="opcion"><input type="radio" name="servicio" value="una mantención o revisión"><span>Mantención</span></label>
-              <label class="opcion"><input type="radio" name="servicio" value="otra cosa"><span>Otra cosa</span></label>
+          <form class="mensaje" data-form-wa data-revela style="--i:1">
+            <p class="mensaje__cab rotulo" aria-hidden="true"><span>F-01</span><span>Formulario</span></p>
+            <div>
+              <h3>Arma tu mensaje</h3>
+              <p class="mensaje__ayuda">Se abre WhatsApp con el texto listo; desde ahí puedes adjuntar fotos.</p>
             </div>
-          </fieldset>
-          <fieldset>
-            <legend>¿Dónde?</legend>
-            <div class="opciones">
-              <label class="opcion"><input type="radio" name="comuna" value="Temuco"><span>Temuco</span></label>
-              <label class="opcion"><input type="radio" name="comuna" value="Padre Las Casas"><span>Padre Las Casas</span></label>
+            <fieldset>
+              <legend class="rotulo">¿Qué necesitas?</legend>
+              <div class="opciones">
+                <label class="opcion"><input type="radio" name="servicio" value="una falla o urgencia"><span>Falla o urgencia</span></label>
+                <label class="opcion"><input type="radio" name="servicio" value="una instalación nueva"><span>Instalación nueva</span></label>
+                <label class="opcion"><input type="radio" name="servicio" value="iluminación"><span>Iluminación</span></label>
+                <label class="opcion"><input type="radio" name="servicio" value="una mantención o revisión"><span>Mantención</span></label>
+                <label class="opcion"><input type="radio" name="servicio" value="otra cosa"><span>Otra cosa</span></label>
+              </div>
+            </fieldset>
+            <fieldset>
+              <legend class="rotulo">¿Dónde?</legend>
+              <div class="opciones">
+                <label class="opcion"><input type="radio" name="comuna" value="Temuco"><span>Temuco</span></label>
+                <label class="opcion"><input type="radio" name="comuna" value="Padre Las Casas"><span>Padre Las Casas</span></label>
+              </div>
+            </fieldset>
+            <div>
+              <label class="mensaje__label" for="detalle">Cuéntame brevemente <span>(opcional)</span></label>
+              <textarea id="detalle" name="detalle" rows="3" placeholder="Ej.: el diferencial salta cuando prendo el horno."></textarea>
             </div>
-          </fieldset>
-          <div>
-            <label class="mensaje__label" for="detalle">Cuéntame brevemente <span>(opcional)</span></label>
-            <textarea id="detalle" name="detalle" rows="3" placeholder="Ej.: el diferencial salta cuando prendo el horno."></textarea>
-          </div>
-          <button type="submit" class="btn btn--signal btn--lg btn--full">
-            <svg class="ic" aria-hidden="true"><use href="#i-chat"/></svg>Abrir WhatsApp
-          </button>
-          <p class="mensaje__privacidad">Este formulario no guarda nada: solo prepara el mensaje.</p>
-        </form>
+            <button type="submit" class="btn btn--signal btn--full">
+              <svg class="ic" aria-hidden="true"><use href="#i-chat"/></svg>Abrir WhatsApp
+            </button>
+            <p class="mensaje__privacidad">Este formulario no guarda nada: solo prepara el mensaje.</p>
+          </form>
+        </div>
       </div>
     </section>
   </main>
@@ -570,12 +536,8 @@
   </footer>
 
   <div class="barra-movil" data-barra-movil>
-    <a class="btn btn--signal" data-wa href="#contacto">
-      <svg class="ic" aria-hidden="true"><use href="#i-chat"/></svg>WhatsApp
-    </a>
-    <a class="btn btn--ghost" data-tel href="#contacto">
-      <svg class="ic" aria-hidden="true"><use href="#i-tel"/></svg>Llamar
-    </a>
+    <a class="btn btn--signal" data-wa href="#contacto"><svg class="ic" aria-hidden="true"><use href="#i-chat"/></svg>WhatsApp</a>
+    <a class="btn btn--linea" data-tel href="#contacto"><svg class="ic" aria-hidden="true"><use href="#i-tel"/></svg>Llamar</a>
   </div>
 </body>
 </html>
