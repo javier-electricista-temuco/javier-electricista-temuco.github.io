@@ -176,6 +176,8 @@ h1, h2, h3 {
 .btn--ghost:hover { border-color: var(--on-panel); background: rgb(255 255 255 / .05); }
 .btn--dark { background: var(--ink); color: var(--paper); }
 .btn--dark:hover { background: color-mix(in srgb, var(--ink) 85%, var(--paper)); }
+.btn--bomberos { background: #B3261E; color: #FFFFFF; }
+.btn--bomberos:hover { background: #8F1D17; }
 .btn--lg { min-height: 56px; padding-inline: 1.6em; font-size: 1.0625rem; }
 .btn--sm { min-height: 40px; padding: .5em 1em; font-size: .9375rem; }
 .btn--full { width: 100%; }
@@ -582,6 +584,9 @@ h1, h2, h3 {
 }
 .urgencias__col h3 { margin-bottom: 18px; font-size: 1.625rem; }
 .urgencias__col--ya h3 { color: var(--alert-ink); }
+.urgencias__botones { display: flex; flex-wrap: wrap; gap: 12px; }
+.urgencias__botones .btn { flex: 1 1 220px; }
+.urgencias__nota { margin-top: 12px; color: var(--ink-2); font-size: .9375rem; }
 .lista-alerta { display: grid; gap: 12px; margin: 0 0 26px; padding: 0; list-style: none; }
 .lista-alerta li { display: flex; gap: 12px; }
 .lista-alerta li::before {
